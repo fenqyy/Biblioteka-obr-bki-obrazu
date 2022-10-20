@@ -15,12 +15,12 @@ class BaseImage:
     color_model: ColorModel  # atrybut przechowujacy biezacy model barw obrazu
 
     def __init__(self, path: str) -> None:
-        self.path = path
         self.data = imread(path)
+        self.color_model = ColorModel.rgb
         pass
 
     def save_img(self, path: str) -> None:
-        imsave('image.jpg', self.data)
+        imsave(path, self.data)
         pass
 
     def show_img(self) -> None:
