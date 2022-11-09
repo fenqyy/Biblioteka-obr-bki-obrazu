@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
 from matplotlib.image import imread
 from matplotlib.pyplot import imshow
+from matplotlib.image import imsave
+import numpy as np
 from enum import Enum
 
 class ColorModel(Enum):
@@ -29,35 +31,21 @@ class BaseImage:
         pass
 
     def get_layer(self, layer_id: int) -> 'BaseImage':
-        """
-        metoda zwracajaca warstwe o wskazanym indeksie
-        """
+        r_layer, g_layer, b_layer = np.squeeze(np.dsplit(self.data, self.data.shape[-1]))
+        if(layer_id == 0):
+            return r_layer
+        elif(layer_id == 1):
+            return g_layer
+        elif(layer_id == 2):
+            return b_layer
         pass
 
-    def to_hsv(self) -> 'BaseImage':
-        """
-        metoda dokonujaca konwersji obrazu w atrybucie data do modelu hsv
-        metoda zwraca nowy obiekt klasy image zawierajacy obraz w docelowym modelu barw
-        """
-        pass
+he = BaseImage('lena.jpg')
 
-    def to_hsi(self) -> 'BaseImage':
-        """
-        metoda dokonujaca konwersji obrazu w atrybucie data do modelu hsi
-        metoda zwraca nowy obiekt klasy image zawierajacy obraz w docelowym modelu barw
-        """
-        pass
+#he.save_img('lenka.jpg')
 
-    def to_hsl(self) -> 'BaseImage':
-        """
-        metoda dokonujaca konwersji obrazu w atrybucie data do modelu hsl
-        metoda zwraca nowy obiekt klasy image zawierajacy obraz w docelowym modelu barw
-        """
-        pass
+x = imread('lenka.jpg')
+plt.imshow(x)
 
-    def to_rgb(self) -> 'BaseImage':
-        """
-        metoda dokonujaca konwersji obrazu w atrybucie data do modelu rgb
-        metoda zwraca nowy obiekt klasy image zawierajacy obraz w docelowym modelu barw
-        """
-        pass
+plt.hist((512,512,3))
+plt.show()
